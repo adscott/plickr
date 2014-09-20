@@ -1,5 +1,6 @@
 require 'sinatra'
 require './models/user'
+require './models/media'
 
 get '/' do
   'Hello World!'
@@ -7,5 +8,5 @@ end
 
 get '/:digest/' do
   pass unless User.allowed(params[:digest])
-  'Photos!'
+  Media.recent.last.thumbnail
 end

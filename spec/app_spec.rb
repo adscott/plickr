@@ -14,10 +14,16 @@ describe 'plickr app' do
 
   it { should be_ok }
 
-  describe 'using a valid secret' do
+  describe 'when using a valid secret' do
     let(:route) { '/lyJWuXv_jiGCSQDamWy7NM5FNXHPno0r7n8prtuY-zo/' }
 
     it { should be_ok }
+
+    describe 'when examining response body' do
+      subject { last_response.body }
+
+      it { should include 'https://farm4.staticflickr.com/3845/15088320129_54c7175ac2_q_d.jpg' }
+    end
   end
 
   describe 'using an invalid secret' do
