@@ -15,13 +15,13 @@ describe 'plickr app' do
   it { should be_ok }
 
   describe 'using a valid secret' do
-    let(:route) { '/972256b97bff8e21824900da996cbb34ce453571cf9e8d2bee7f29aedb98fb3a/' }
+    let(:route) { '/lyJWuXv_jiGCSQDamWy7NM5FNXHPno0r7n8prtuY-zo/' }
 
     it { should be_ok }
   end
 
   describe 'using an invalid secret' do
-    let(:route) { '/cd76f6fc15579c01c1c60f146f4b0cd9bf8fed59ac6f178fa89a711bfb32353f/' }
+    let(:route) { '/zXb2_BVXnAHBxg8Ub0sM2b-P7VmsbxePqJpxG_syNT8/' }
 
     it { should be_not_found }
   end
