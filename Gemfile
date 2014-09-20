@@ -6,4 +6,6 @@ gem 'sinatra'
 group :development do
   gem 'rake'
   gem 'shotgun'
+  gem 'rspec'
+  gem 'rack-test'
 end
