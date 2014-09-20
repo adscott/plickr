@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'base64'
+require './user'
 
 get '/' do
   'Hello World!'
@@ -8,9 +8,8 @@ end
 get '/:digest/' do
   valid = ENV['USERS']
     .split(':')
-    .map { |user| OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), ENV['SECRET'], user) }
-    .map { |hmac| Base64.urlsafe_encode64(hmac) }
-    .map { |encoded| encoded.gsub(/=+$/, '') }
+    .map { |u| User.new(u) }
+    .map { |u| u.digest(ENV['SECRET']) }
     .include?(params[:digest])
 
   pass unless valid
