@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 gem 'sinatra'
-gem 'flickraw'
+gem 'flickraw-cached'
 gem 'dalli'
 
 group :development do

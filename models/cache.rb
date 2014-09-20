@@ -1,12 +1,13 @@
 require 'dalli'
+require './models/conf'
 
 class Cache
   def initialize
-    if ENV['MEMCACHIER_SERVERS'].nil?
+    if Conf.value('MEMCACHIER_SERVERS').nil?
       @delegate = Dalli::Client.new
     else
-      servers = ENV['MEMCACHIER_SERVERS'].split(',')
-      creds = {:username => ENV['MEMCACHIER_USERNAME'], :password => ENV['MEMCACHIER_PASSWORD']}
+      servers = Conf.value('MEMCACHIER_SERVERS').split(',')
+      creds = {:username => Conf.value('MEMCACHIER_USERNAME'), :password => Conf.value('MEMCACHIER_PASSWORD')}
       @delegate = Dalli::Client.new(servers, creds)
     end
   end

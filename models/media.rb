@@ -1,5 +1,6 @@
-require 'flickraw'
+require 'flickraw-cached'
 require './models/cache'
+require './models/conf'
 
 class Media
   attr_accessor :thumbnail, :url
@@ -20,10 +21,10 @@ class Media
   end
 
   def self.init_flickr_delegate
-    FlickRaw.api_key = ENV['FLICKR_API_KEY']
-    FlickRaw.shared_secret = ENV['FLICKR_SHARED_SECRET']
-    flickr.access_token = ENV['FLICKR_ACCESS_TOKEN']
-    flickr.access_secret = ENV['FLICKR_ACCESS_SECRET']
+    FlickRaw.api_key = Conf.value('FLICKR_API_KEY')
+    FlickRaw.shared_secret = Conf.value('FLICKR_SHARED_SECRET')
+    flickr.access_token = Conf.value('FLICKR_ACCESS_TOKEN')
+    flickr.access_secret = Conf.value('FLICKR_ACCESS_SECRET')
     flickr
   end
 
@@ -56,7 +57,7 @@ class Media
   end
 
   def self.all_pages(page=1)
-    photos = Media.flickr_delegate.people.getPhotos(user_id: ENV['FLICKR_ACCOUNT'], per_page: 500, page: page).map { |photo| photo.id }
+    photos = Media.flickr_delegate.people.getPhotos(user_id: Conf.value('FLICKR_ACCOUNT'), per_page: 500, page: page).map { |photo| photo.id }
     photos.size < 500 ? photos : photos.concat(all_pages(page + 1))
   end
 end

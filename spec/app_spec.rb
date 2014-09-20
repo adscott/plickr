@@ -6,10 +6,13 @@ describe 'plickr app' do
   let(:secret) { 'foobar' }
 
   before do
-    allow(ENV).to receive(:[]).with('USERS').and_return(users)
-    allow(ENV).to receive(:[]).with('SECRET').and_return(secret)
+    allow(Conf).to receive(:value).and_return('default')
+    allow(Conf).to receive(:value).with('USERS').and_return(users)
+    allow(Conf).to receive(:value).with('SECRET').and_return(secret)
+    allow(Conf).to receive(:value).with('MEMCACHIER_SERVERS').and_return(nil)
     get route
   end
+
   subject { last_response }
 
   it { should be_ok }
@@ -22,7 +25,7 @@ describe 'plickr app' do
     describe 'when examining response body' do
       subject { last_response.body }
 
-      it { should include 'https://farm4.staticflickr.com/3845/15088320129_54c7175ac2_q_d.jpg' }
+      it { should include 'https://farm4.staticflickr.com/3845/15088320129_54c7175ac2_q.jpg' }
     end
   end
 

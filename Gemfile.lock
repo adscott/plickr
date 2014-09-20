@@ -5,6 +5,8 @@ GEM
     dalli (2.7.2)
     diff-lcs (1.2.5)
     flickraw (0.9.8)
+    flickraw-cached (20120701)
+      flickraw (>= 0.9)
     method_source (0.8.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -42,7 +44,7 @@ PLATFORMS
 
 DEPENDENCIES
   dalli
-  flickraw
+  flickraw-cached
   pry
   rack-test
   rake
