@@ -5,7 +5,7 @@ unless ENV['RACK_ENV'] == 'production'
 end
 
 task :digest, [:user, :secret] do |t, args|
-  require './user'
+  require './models/user'
   args.with_defaults secret: ENV['SECRET']
   digest = User.new(args[:user]).digest(args[:secret])
   puts "digest: #{digest}"

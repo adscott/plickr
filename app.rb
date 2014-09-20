@@ -1,5 +1,5 @@
 require 'sinatra'
-require './user'
+require './models/user'
 
 get '/' do
   'Hello World!'
