@@ -6,13 +6,6 @@ get '/' do
 end
 
 get '/:digest/' do
-  valid = ENV['USERS']
-    .split(':')
-    .map { |u| User.new(u) }
-    .map { |u| u.digest(ENV['SECRET']) }
-    .include?(params[:digest])
-
-  pass unless valid
-
+  pass unless User.allowed(params[:digest])
   'Photos!'
 end

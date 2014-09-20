@@ -5,8 +5,15 @@ class User
     @name = name
   end
 
-  def digest(key)
-    hmac = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), key, @name)
+  def digest
+    hmac = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), ENV['SECRET'], @name)
     Base64.urlsafe_encode64(hmac).gsub(/=+$/, '')
+  end
+
+  def self.allowed(digest)
+    ENV['USERS']
+      .split(':')
+      .map { |u| User.new(u).digest }
+      .include?(digest)
   end
 end
