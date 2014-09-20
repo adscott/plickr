@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = '2'
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = 'chef/ubuntu-14.04'
+
+  config.ssh.forward_agent = true
+  config.vm.synced_folder '../', '/home/vagrant/workspace'
+  config.vm.network 'forwarded_port', guest: 9393, host: 9393
+
+  config.omnibus.chef_version = :latest
+  config.berkshelf.enabled = true
+
+  config.vm.provision 'chef_solo' do |chef|
+    chef.run_list = [
+      'recipe[plickr::rvm]',
+      'recipe[plickr::heroku]',
+      'recipe[plickr::packages]',
+      'recipe[rvm::user]',
+      'recipe[rvm::vagrant]'
+    ]
+  end
+
+  config.vm.provision :shell, :inline => "echo -e '#{File.read("#{Dir.home}/.gitconfig")}' > '/home/vagrant/.gitconfig'" if File.exist?("#{Dir.home}/.gitconfig")
+  config.vm.provision :shell, :inline => '/home/vagrant/.rvm/bin/rvm rvmrc warning ignore /home/vagrant/workspace/Gemfile'
+end
