@@ -6,8 +6,8 @@ describe 'plickr app' do
   let(:secret) { 'foobar' }
 
   before do
-    allow(ENV).to receive(:[]).with('users').and_return(users)
-    allow(ENV).to receive(:[]).with('secret').and_return(secret)
+    allow(ENV).to receive(:[]).with('USERS').and_return(users)
+    allow(ENV).to receive(:[]).with('SECRET').and_return(secret)
     get route
   end
   subject { last_response }

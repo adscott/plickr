@@ -6,9 +6,9 @@ get '/' do
 end
 
 get '/:digest/' do
-  valid = ENV['users']
+  valid = ENV['USERS']
     .split(':')
-    .map { |user| OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), ENV['secret'], user) }
+    .map { |user| OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), ENV['SECRET'], user) }
     .map { |hmac| Base64.urlsafe_encode64(hmac) }
     .map { |encoded| encoded.gsub(/=+$/, '') }
     .include?(params[:digest])
