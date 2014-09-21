@@ -2,12 +2,13 @@ require 'base64'
 require './models/conf'
 
 class User
-  def initialize(name)
+  def initialize(name,secret=nil)
     @name = name
+    @secret ||= Conf.value('SECRET')
   end
 
   def digest
-    hmac = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), Conf.value('SECRET'), @name)
+    hmac = OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), @secret, @name)
     Base64.urlsafe_encode64(hmac).gsub(/=+$/, '')
   end
 

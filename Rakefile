@@ -7,8 +7,7 @@ end
 namespace :user do
   task :digest, [:user, :secret] do |t, args|
     require './models/user'
-    args.with_defaults secret: ENV['SECRET']
-    digest = User.new(args[:user]).digest(args[:secret])
+    digest = User.new(args[:user], args[:secret]).digest
     puts "digest: #{digest}"
   end
 end
