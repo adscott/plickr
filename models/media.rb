@@ -3,15 +3,16 @@ require './models/cache'
 require './models/conf'
 
 class Media
-  attr_accessor :thumbnail, :url
+  attr_accessor :id, :thumbnail, :url
 
   def initialize(opts)
+    @id = opts[:id]
     @thumbnail = opts[:thumbnail]
     @url = opts[:url]
   end
 
   def self.recent
-    fetch_flickr_ids.map { |id| Media.from_flickr_id(id) }
+    fetch_flickr_ids.map { |id| Media.from_flickr_id(id) }.sort { |a,b| b.id <=> a.id }
   end
 
   private
@@ -32,8 +33,9 @@ class Media
     from_flickr_id(id) if fetch_flickr_ids.include?(id)
   end
 
-  def self.from_flickr(media)
+  def self.from_flickr(media, id)
     raw_opts = {
+      id: id,
       thumbnail: media.detect { |img| img['label'] == 'Large Square' }['source'],
       url: media.reduce { |memo, img| img['width'].to_i > memo['width'].to_i ? img : memo }['source'],
     }
@@ -46,7 +48,7 @@ class Media
 
   def self.from_flickr_id(id)
     Cache.instance.fetch("media-#{id}") do
-      from_flickr(Media.flickr_delegate.photos.getSizes(photo_id: id))
+      from_flickr(Media.flickr_delegate.photos.getSizes(photo_id: id), id)
     end
   end
 

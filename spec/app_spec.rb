@@ -1,11 +1,20 @@
 require './spec/spec_helper'
 
 describe 'plickr app' do
+  use_vcr_cassette
+
   let(:route) { '/' }
   let(:users) { 'developer:tester:cheesemaker' }
   let(:secret) { 'foobar' }
 
+  class StubCache
+    def fetch(key, ttl=nil)
+      yield
+    end
+  end
+
   before do
+    allow(Cache).to receive(:instance).and_return(::StubCache.new)
     allow(Conf).to receive(:value).and_return('default')
     allow(Conf).to receive(:value).with('USERS').and_return(users)
     allow(Conf).to receive(:value).with('SECRET').and_return(secret)
@@ -25,7 +34,7 @@ describe 'plickr app' do
     describe 'when examining response body' do
       subject { last_response.body }
 
-      it { should include 'https://farm4.staticflickr.com/3845/15088320129_54c7175ac2_q.jpg' }
+      it { should include 'https://somefarm.com/5555/image_q.jpg' }
     end
   end
 

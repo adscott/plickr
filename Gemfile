@@ -10,5 +10,7 @@ group :development do
   gem 'shotgun'
   gem 'rspec'
   gem 'rack-test'
+  gem 'vcr'
+  gem 'webmock'
   gem 'pry'
 end
