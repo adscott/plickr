@@ -2,6 +2,7 @@ $gutter: 2em;
 $line-height: 2em;
 $bg-color: gray;
 $text-color: white;
+$narrow: 1000px;
 
 body {
   background-color: $bg-color;
@@ -22,6 +23,9 @@ img {
 .gallery {
   margin: 0 $gutter*4;
   text-align: center;
+  @media (max-width: $narrow) {
+    margin: 0;
+  }
 }
 
 .welcome {
