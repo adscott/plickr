@@ -9,12 +9,12 @@ end
 set :haml, format: :html5, layout: :layout
 
 get '/' do
-  haml :index, locals: {title: 'hi'}
+  haml :index, locals: {title: 'Hi'}
 end
 
 get '/:digest/' do
   pass unless User.allowed(params[:digest])
-  haml :photos, locals: {title: 'photos', media: Media.recent}
+  haml :photos, locals: {title: 'Photos', media: Media.recent}
 end
 
 get '/stylesheets/:stylesheet.css' do |stylesheet|
