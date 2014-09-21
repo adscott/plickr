@@ -35,3 +35,4 @@ build/
 
 .vagrant
 .sass-cache
+.DS_Store
