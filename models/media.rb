@@ -34,10 +34,11 @@ class Media
   end
 
   def self.from_flickr(media, id)
+    resized = media.reject { |img| img['label'] == 'Original' }
     raw_opts = {
       id: id,
-      thumbnail: media.detect { |img| img['label'] == 'Large Square' }['source'],
-      url: media.reduce { |memo, img| img['width'].to_i > memo['width'].to_i ? img : memo }['source'],
+      thumbnail: resized.detect { |img| img['label'] == 'Large Square' }['source'],
+      url: resized.reduce { |memo, img| img['width'].to_i > memo['width'].to_i ? img : memo }['source'],
     }
     opts = raw_opts.reduce({}) do |memo,(k,v)|
       memo[k] = v.is_a?(String) ? CGI::escapeHTML(v) : v
