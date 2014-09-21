@@ -1,3 +1,20 @@
+$gutter: 2em;
+$bg-color: gray;
+
+body {
+  background-color: $bg-color;
+}
+
+a {
+  text-decoration: none;
+}
+
 img {
-  padding: 20px;
+  border-radius: $gutter/2;
+  margin: $gutter;
+}
+
+.gallery {
+  margin: 0 $gutter*4;
+  text-align: center;
 }
