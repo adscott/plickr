@@ -1,8 +1,13 @@
 $gutter: 2em;
+$line-height: 2em;
 $bg-color: gray;
+$text-color: white;
 
 body {
   background-color: $bg-color;
+  color: $text-color;
+  font-family: arial;
+  font-size: $line-height;
 }
 
 a {
@@ -17,4 +22,9 @@ img {
 .gallery {
   margin: 0 $gutter*4;
   text-align: center;
+}
+
+.welcome {
+  text-align: center;
+  margin: $gutter*2 auto 0;
 }

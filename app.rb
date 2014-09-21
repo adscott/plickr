@@ -9,7 +9,7 @@ end
 set :haml, format: :html5, layout: :layout
 
 get '/' do
-  'Hello World!'
+  haml :index, locals: {title: 'hi'}
 end
 
 get '/:digest/' do
