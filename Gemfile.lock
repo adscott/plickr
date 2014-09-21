@@ -10,6 +10,8 @@ GEM
     flickraw (0.9.8)
     flickraw-cached (20120701)
       flickraw (>= 0.9)
+    haml (4.0.5)
+      tilt
     method_source (0.8.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -53,6 +55,7 @@ PLATFORMS
 DEPENDENCIES
   dalli
   flickraw-cached
+  haml
   pry
   rack-test
   rake

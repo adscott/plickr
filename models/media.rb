@@ -12,7 +12,7 @@ class Media
   end
 
   def self.recent
-    fetch_flickr_ids.map { |id| Media.from_flickr_id(id) }.sort { |a,b| b.id <=> a.id }
+    fetch_flickr_ids.map { |id| Media.from_flickr_id(id) }
   end
 
   private

@@ -4,6 +4,7 @@ ruby '2.1.2'
 gem 'sinatra'
 gem 'flickraw-cached'
 gem 'dalli'
+gem 'haml'
 
 group :development do
   gem 'rake'
