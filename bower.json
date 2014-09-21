@@ -1,0 +1,20 @@
+{
+  "name": "plickr",
+  "version": "0.0.0",
+  "homepage": "https://github.com/adscott/plickr",
+  "authors": [
+    "Adam Scott <me@adams.co.tt>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "swipebox": "~1.2.9",
+    "jquery": "~2.1.1"
+  }
+}

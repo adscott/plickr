@@ -4,5 +4,10 @@
     %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
     %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}
     %link{href: versioned_scss('main'), rel: 'stylesheet', type: 'text/css'}
+    %link{href: versioned_asset('/bower_components/swipebox/src/css/swipebox.min.css'), rel: 'stylesheet', type: 'text/css'}
     %title= title
-  %body= yield
+  %body
+    = yield
+    %script{src: versioned_asset('/bower_components/jquery/dist/jquery.min.js')}
+    %script{src: versioned_asset('/bower_components/swipebox/src/js/jquery.swipebox.min.js')}
+    %script{src: versioned_asset('/js/main.js')}

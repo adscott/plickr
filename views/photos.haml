@@ -1,2 +1,4 @@
-- media.each do |m|
-  %img{src: m.thumbnail, alt: 'thumbnail'}
+.gallery
+  - media.each do |m|
+    %a.photo{href: m.url, rel: 'group'}
+      %img{src: m.thumbnail, alt: 'thumbnail'}

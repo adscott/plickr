@@ -19,7 +19,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       'recipe[plickr::heroku]',
       'recipe[plickr::packages]',
       'recipe[rvm::user]',
-      'recipe[rvm::vagrant]'
+      'recipe[rvm::vagrant]',
+      'recipe[nodejs::nodejs_from_binary]'
     ]
   end
 

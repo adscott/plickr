@@ -36,3 +36,6 @@ build/
 .vagrant
 .sass-cache
 .DS_Store
+
+node_modules
+bower_components

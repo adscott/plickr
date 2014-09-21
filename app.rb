@@ -26,4 +26,8 @@ helpers do
   def versioned_scss(stylesheet)
     "/stylesheets/#{stylesheet}.css?#{File.mtime(File.join('views', 'stylesheets', "#{stylesheet}.scss")).to_i.to_s}"
   end
+
+  def versioned_asset(asset)
+    "#{asset}?#{File.mtime(File.join('public', asset)).to_i.to_s}"
+  end
 end
