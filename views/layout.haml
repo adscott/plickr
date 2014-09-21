@@ -1,7 +1,8 @@
 !!! 5
 %html
   %head
-    %meta{:content => 'width=device-width, initial-scale=1.0', :name => 'viewport'}
+    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
     %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}
+    %link{href: versioned_scss('main'), rel: 'stylesheet', type: 'text/css'}
     %title= title
   %body= yield

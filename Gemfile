@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'flickraw-cached'
 gem 'dalli'
 gem 'haml'
+gem 'sass'
 
 group :development do
   gem 'rake'
