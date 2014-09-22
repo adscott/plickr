@@ -1,14 +1,17 @@
-$gutter: 2em;
-$line-height: 2em;
+$gutter: 60px;
+$line-height: 20px;
 $bg-color: gray;
 $text-color: white;
 $narrow: 1000px;
+$mobile: 600px;
+$image-width: 150px;
 
 body {
   background-color: $bg-color;
   color: $text-color;
   font-family: arial;
   font-size: $line-height;
+  margin: 0;
 }
 
 a {
@@ -17,14 +20,38 @@ a {
 
 img {
   border-radius: $gutter/2;
-  margin: $gutter/4;
 }
 
 .gallery {
-  margin: 0 $gutter*4;
-  text-align: center;
-  @media (max-width: $narrow) {
+  margin: 0 auto;
+  width: (($image-width + $gutter/2) * 6);
+
+  @media (max-width: (($image-width + $gutter/2) * 6)) {
+    width: (($image-width + $gutter/2) * 5);
+  }
+
+  @media (max-width: (($image-width + $gutter/2) * 5)) {
+    width: (($image-width + $gutter/2) * 4);
+  }
+
+  @media (max-width: (($image-width + $gutter/2) * 4)) {
+    width: (($image-width + $gutter/2) * 3);
+  }
+
+  @media (max-width: (($image-width + $gutter/2) * 3)) {
     margin: 0;
+    width: 100%;
+  }
+
+  a {
+    margin: $gutter/4;
+    display: inline-block;
+
+    @media (max-width: (($image-width + $gutter/2) * 3)) {
+      width: $image-width;
+      margin: $gutter/4 auto;
+      display: block;
+    }
   }
 }
 
