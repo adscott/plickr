@@ -2,6 +2,9 @@ require 'base64'
 require './models/conf'
 
 class User
+
+  attr_accessor :name
+
   def initialize(name,secret=nil)
     @name = name
     @secret ||= Conf.value('SECRET')
@@ -13,9 +16,12 @@ class User
   end
 
   def self.allowed(digest)
+    all.map(&:digest).include?(digest)
+  end
+
+  def self.all
     Conf.value('USERS')
       .split(':')
-      .map { |u| User.new(u).digest }
-      .include?(digest)
+      .map { |u| User.new(u) }
   end
 end

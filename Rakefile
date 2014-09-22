@@ -10,6 +10,12 @@ namespace :user do
     digest = User.new(args[:user], args[:secret]).digest
     puts "digest: #{digest}"
   end
+
+  task :urls, [:host] do |t, args|
+    require './models/user'
+    require './models/conf'
+    User.all.each { |user| puts "#{user.name}: http://#{args[:host]}/#{user.digest}/"}
+  end
 end
 
 namespace :cache do
