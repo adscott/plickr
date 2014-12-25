@@ -17,6 +17,11 @@ get '/:digest/' do
   haml :photos, locals: {title: 'Photos', media: Media.recent}
 end
 
+get '/:digest/photo/:id' do
+  pass unless User.allowed(params[:digest])
+  haml :photo, locals: {title: 'Photo', media: Media.recent.find { |m| m.id == params[:id] }}
+end
+
 get '/stylesheets/:stylesheet.css' do |stylesheet|
   expires far_future, :public, :must_revalidate
   scss :"stylesheets/#{stylesheet}"
