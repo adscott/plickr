@@ -47,6 +47,7 @@ describe 'plickr app' do
         subject { last_response.body }
 
         it { should include 'https://somefarm.com/5555/image_1234_k.jpg' }
+        it { should include '/lyJWuXv_jiGCSQDamWy7NM5FNXHPno0r7n8prtuY-zo/photo/5678' }
       end
     end
   end

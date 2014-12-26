@@ -1,1 +1,20 @@
-%img.photo{src: media.url, alt: 'photo'}
+.photo
+  %img{src: photo.url, alt: 'photo'}
+  .controls
+    - unless previous_photo.nil?
+      %a.previous{href: previous_photo} &#9664;
+    - unless next_photo.nil?
+      %a.next{href: next_photo} &#9654;
+
+:javascript
+  (function () {
+    debugger;
+    var id;
+    $('.photo').mousemove(function () {
+      clearTimeout(id);
+      $('.controls').addClass('content-active');
+      id = setTimeout(function () {
+        $('.controls').removeClass('content-active');
+      }, 2000);
+    });
+  }());

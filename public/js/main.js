@@ -1,3 +1,3 @@
 $(document).ready(function() {
-  $('a.photo').swipebox();
+  $('a.large').swipebox();
 });

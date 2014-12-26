@@ -19,12 +19,21 @@ end
 
 get '/:digest/photo/:id' do
   pass unless User.allowed(params[:digest])
-  haml :photo, locals: {title: 'Photo', media: Media.recent.find { |m| m.id == params[:id] }}
+  media_with_index = Hash[Media.recent.map.with_index.to_a]
+  photo = media_with_index.keys.find { |m| m.id == params[:id] }
+  photo_position = media_with_index[photo]
+  previous_photo = (photo_position - 1) >= 0 ? media_with_index.keys[photo_position - 1] : nil
+  next_photo = (photo_position + 1) < media_with_index.keys.length ? media_with_index.keys[photo_position + 1] : nil
+  haml :photo, locals: {title: 'Photo', photo: photo, previous_photo: url_for(previous_photo, params[:digest]), next_photo: url_for(next_photo, params[:digest])}
 end
 
 get '/stylesheets/:stylesheet.css' do |stylesheet|
   expires far_future, :public, :must_revalidate
   scss :"stylesheets/#{stylesheet}"
+end
+
+def url_for(photo, digest)
+  photo.nil? ? nil : "/#{digest}/photo/#{photo.id}"
 end
 
 helpers do

@@ -11,6 +11,16 @@ class Media
     @url = opts[:url]
   end
 
+  def ==(other)
+    other.instance_of?(self.class) && @id == other.id
+  end
+
+  alias_method :eql?, :==
+
+  def hash
+    id.hash
+  end
+
   def self.recent
     fetch_flickr_ids.map { |id| Media.from_flickr_id(id) }
   end
