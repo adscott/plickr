@@ -8,6 +8,16 @@ end
 
 set :haml, format: :html5, layout: :layout
 
+if ENV['RACK_ENV'] == 'production'
+  before '*' do
+    if !request.ssl?
+      request_url = request.env['REQUEST_URI']
+      request_url['http'] ='https'
+      redirect request_url
+    end
+  end
+end
+
 get '/' do
   haml :index, locals: {title: 'Hi'}
 end
