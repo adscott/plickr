@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'flickraw-cached'
 gem 'dalli'
 gem 'haml'

@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/cookies'
 require './models/user'
 require './models/media'
 
@@ -19,16 +20,21 @@ if ENV['RACK_ENV'] == 'production'
 end
 
 get '/' do
-  haml :index, locals: {title: 'Hi'}
+  if User.allowed(cookies[:digest])
+    haml :photos, locals: {title: 'Photos', media: Media.recent}
+  else
+    haml :index, locals: {title: 'Hi'}
+  end
 end
 
 get '/:digest/' do
   pass unless User.allowed(params[:digest])
-  haml :photos, locals: {title: 'Photos', media: Media.recent}
+  cookies[:digest] = params[:digest]
+  redirect to('/')
 end
 
-get '/:digest/photo/:id' do
-  pass unless User.allowed(params[:digest])
+get '/photo/:id' do
+  pass unless User.allowed(cookies[:digest])
   media_with_index = Hash[Media.recent.map.with_index.to_a]
   photo = media_with_index.keys.find { |m| m.id == params[:id] }
   photo_position = media_with_index[photo]

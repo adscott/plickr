@@ -7,7 +7,7 @@ ENV['RACK_ENV'] = 'test'
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
   c.hook_into :webmock
-  c.default_cassette_options = { match_requests_on: [:uri, :body] }
+  c.default_cassette_options = { match_requests_on: [:uri, :body], allow_playback_repeats: true }
 end
 
 module RSpecMixin
