@@ -26,4 +26,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, :inline => "echo -e '#{File.read("#{Dir.home}/.gitconfig")}' > '/home/vagrant/.gitconfig'" if File.exist?("#{Dir.home}/.gitconfig")
   config.vm.provision :shell, :inline => '/home/vagrant/.rvm/bin/rvm rvmrc warning ignore /home/vagrant/workspace/Gemfile'
+
+  if Vagrant.has_plugin?('vagrant-proxyconf') && ENV.has_key?('http_proxy')
+    config.proxy.http = ENV['http_proxy']
+  end
 end
