@@ -14,6 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.berkshelf.enabled = true
 
   config.vm.provision 'chef_solo' do |chef|
+    chef.version = '12.19.36'
     chef.run_list = [
       'recipe[plickr::rvm]',
       'recipe[plickr::heroku]',
